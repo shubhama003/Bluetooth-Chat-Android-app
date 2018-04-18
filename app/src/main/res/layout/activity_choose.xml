@@ -4,18 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ChooseActivity">
 
     <Button
         android:layout_width="wrap_content"
         android:id="@+id/chat"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:background="#5C6BC0"
+        android:textColor="#FFF"
         android:text="Chat"
         android:layout_height="wrap_content" />
 
     <Button
         android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="#5C6BC0"
+        android:textColor="#FFF"
         android:layout_height="wrap_content"
         android:text="File Exchange"
+
         android:id="@+id/file"/>
 
 </LinearLayout>

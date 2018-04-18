@@ -10,12 +10,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+
 public class FileExchangeActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 1;
     Button chooseButton,sendButton;
     TextView showFile;
     Uri uri;
+    String fileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,11 @@ public class FileExchangeActivity extends AppCompatActivity {
             }
         });
 
+        if(this.fileName!=null)
+        {
+            showFile.setText(this.fileName);
+        }
+
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +62,8 @@ public class FileExchangeActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     @Override
@@ -63,6 +73,8 @@ public class FileExchangeActivity extends AppCompatActivity {
             if(data!=null)
             {
                 this.uri = data.getData();
+                File file = new File(uri.getPath());
+                this.fileName = file.getName();
                 Toast.makeText(this, uri.toString(), Toast.LENGTH_SHORT).show();
             }
         }
