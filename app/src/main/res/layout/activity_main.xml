@@ -20,10 +20,13 @@
             android:layout_height="wrap_content"
             android:text="Not Connected" />
 
+
         <Button
             android:id="@+id/btn_connect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#5C6BC0"
+            android:textColor="#FFF"
             android:layout_marginTop="10dp"
             android:text="Connect" />
     </LinearLayout>
@@ -60,6 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.2"
+            android:background="#5C6BC0"
+            android:textColor="#FFF"
             android:text="send" />
     </LinearLayout>
 </LinearLayout>

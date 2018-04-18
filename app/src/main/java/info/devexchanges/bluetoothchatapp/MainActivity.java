@@ -8,6 +8,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TextInputLayout;
@@ -131,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.layout_bluetooth);
         dialog.setTitle("Bluetooth Devices");
 
+
         if (bluetoothAdapter.isDiscovering()) {
             bluetoothAdapter.cancelDiscovery();
         }
@@ -203,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
         dialog.show();
     }
 
@@ -301,22 +304,27 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
 
+            // When discovery finds a device
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                Log.d("TAGY","DEVICE FOUND");
+                // Get the BluetoothDevice object from the Intent
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                // If it's already paired, skip it, because it's been listed already
                 if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
                     discoveredDevicesAdapter.add(device.getName() + "\n" + device.getAddress());
                 }
-            }
-            if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                Log.d("TAGY","DEVICE FINISHED");
+                // When discovery is finished, change the Activity title
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+                discoveredDevicesAdapter.clear();
+                setProgressBarIndeterminateVisibility(false);
+                setTitle("Select a device to connect");
                 if (discoveredDevicesAdapter.getCount() == 0) {
-                    discoveredDevicesAdapter.add(getString(R.string.none_found));
+
+                    discoveredDevicesAdapter.add("No devices found");
                 }
             }
-            if(BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action))
+            else
             {
-                Log.d("TAGY","DISCOVERY STARTED");
+                discoveredDevicesAdapter.add("Scanning Bluetooth Devices....");
             }
         }
     };

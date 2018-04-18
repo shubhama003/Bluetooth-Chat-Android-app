@@ -21,12 +21,18 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
@@ -40,6 +46,7 @@ public class ChatController {
     private ConnectThread connectThread;
     private ReadWriteThread connectedThread;
     private int state;
+    private Context context;
 
     static final int STATE_NONE = 0;
     static final int STATE_LISTEN = 1;
@@ -49,7 +56,7 @@ public class ChatController {
     public ChatController(Context context, Handler handler) {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         state = STATE_NONE;
-
+        this.context = context;
         this.handler = handler;
     }
 
