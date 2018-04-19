@@ -3,9 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/back1"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".FileExchangeActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="#000"
+        android:textSize="25sp"
+        android:id="@+id/showfile"/>
 
 
     <Button
@@ -13,8 +21,8 @@
         android:layout_height="wrap_content"
         android:text="choose"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
-        android:background="#5C6BC0"
+        android:layout_marginTop="180dp"
+        android:background="#00695C"
         android:textColor="#FFF"
         android:id="@+id/choosefile"/>
 
@@ -23,16 +31,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:background="#5C6BC0"
+        android:background="#00695C"
         android:textColor="#FFF"
         android:text="send"
         android:id="@+id/sendfile"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textSize="25sp"
-        android:text="random"
-        android:id="@+id/showfile"/>
+
 
 </LinearLayout>
