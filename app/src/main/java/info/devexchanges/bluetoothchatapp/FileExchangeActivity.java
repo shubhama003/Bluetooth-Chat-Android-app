@@ -12,19 +12,21 @@ import android.widget.Toast;
 
 import java.io.File;
 
+import info.devexchanges.bluetoothchatapp.file.MyFile;
+
 public class FileExchangeActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 1;
     Button chooseButton,sendButton;
     TextView showFile;
     Uri uri;
-    String fileName;
+    MyFile myFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_exchange);
-
+        myFile = new MyFile();
         chooseButton = (Button)findViewById(R.id.choosefile);
         sendButton = (Button)findViewById(R.id.sendfile);
         showFile = (TextView)findViewById(R.id.showfile);
@@ -41,10 +43,12 @@ public class FileExchangeActivity extends AppCompatActivity {
             }
         });
 
-        if(this.fileName!=null)
-        {
-            showFile.setText(this.fileName);
-        }
+        myFile.setFileChangeListener(new MyFile.FileChangeListener() {
+            @Override
+            public void onChange() {
+                showFile.setText(myFile.getFile().getPath());
+            }
+        });
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +77,7 @@ public class FileExchangeActivity extends AppCompatActivity {
             if(data!=null)
             {
                 this.uri = data.getData();
-                File file = new File(uri.getPath());
-                this.fileName = file.getName();
+                myFile.setFile(new File(uri.getPath()));
                 Toast.makeText(this, uri.toString(), Toast.LENGTH_SHORT).show();
             }
         }
